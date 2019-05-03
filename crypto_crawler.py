@@ -4,7 +4,7 @@ from csv import writer
 from datetime import datetime
 from requests import ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError, get
 
-timestamp = datetime.now().timestamp()
+timestamp = ''.join([str(t) for t in list(datetime.now().timetuple())[:-6]])
 
 crypto_Url = "https://m.investing.com/crypto/"
 
