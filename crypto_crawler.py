@@ -11,7 +11,7 @@ soup = BeautifulSoup(requestString.text, "lxml")
 content = soup.findAll('tr')
 date = datetime.strptime(requestString.headers['Date'][:-4], '%a, %d %b %Y %H:%M:%S')
 
-with open("crypto.csv", "a+") as f:
+with open("../crawler_crypto/crypto.csv", "a+") as f:
 
         w = writer(f, delimiter = ";")
 
