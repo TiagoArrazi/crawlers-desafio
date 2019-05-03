@@ -17,7 +17,7 @@ with open(path.abspath(f"tiagoArrazi/crawler_crypto/crypto_{timestamp}.csv"), "a
 
         w = writer(f, delimiter = ";")
 
-        if stat(path.abspath("tiagoArrazi/crawler_crypto/crypto_{timestamp}.csv")).st_size == 0:
+        if stat(path.abspath(f"tiagoArrazi/crawler_crypto/crypto_{timestamp}.csv")).st_size == 0:
             w.writerow(['code', 'name', 'priceUSD', 'change24H', 'change7D', 'symbol', 'priceBTC', 'marketCap', 'volume24H', 'totalVolume', 'timestamp'])
 
         for c in content[1:]:
