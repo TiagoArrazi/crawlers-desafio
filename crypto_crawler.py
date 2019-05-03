@@ -23,4 +23,4 @@ with open("../crawler_crypto/crypto.csv", "a+") as f:
             l = c.get_text().replace('\t', '').split('\n')
             L = list(filter(None, l))
 
-
+            w.writerow([L[0],L[1],L[2],L[3],L[4],L[5],L[6],L[7],L[8],L[9], date])
