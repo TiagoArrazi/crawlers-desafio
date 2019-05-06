@@ -1,12 +1,16 @@
-from os import stat, path
+from os import stat
 from bs4 import BeautifulSoup
 from csv import writer
 from datetime import datetime
 from requests import ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError, get
+from subprocess import Popen, PIPE 
 
 
 def get_timestamp():
-    return ''.join(['0' + str(t) if t in list(range(1,10)) else str(t) for t in list(datetime.now().timetuple())[:-6]])
+    return ''.join(['0' + str(t) 
+                     if t in list(range(1,10)) 
+                     else str(t) 
+                     for t in list(datetime.now().timetuple())[:-6]])
 
 
 crypto_Url = "https://m.investing.com/crypto/"
@@ -15,13 +19,17 @@ requestString = get(url = crypto_Url, headers = {'User-Agent':'curl/7.52.1'})
 soup = BeautifulSoup(requestString.text, "lxml")
 content = soup.findAll('tr')
 date = datetime.strptime(requestString.headers['Date'][:-4], '%a, %d %b %Y %H:%M:%S')
+filename = "{}/tiagoArrazi/crawler_crypto/crypto_{}.csv".format(Popen('pwd', stdout=PIPE).communicate()[0][:-1].decode('utf-8'))
 
-with open(path.abspath(f"crypto_{get_timestamp()}.csv"), "a+") as f:
+
+with open(filename, "a+") as f:
 
         w = writer(f, delimiter = ";")
 
-        if stat(path.abspath(f"crypto_{get_timestamp()}.csv")).st_size == 0:
-            w.writerow(['code', 'name', 'priceUSD', 'change24H', 'change7D', 'symbol', 'priceBTC', 'marketCap', 'volume24H', 'totalVolume', 'timestamp'])
+        if stat(filename).st_size == 0:
+            w.writerow(['code', 'name', 'priceUSD', 'change24H', 
+                        'change7D', 'symbol', 'priceBTC', 'marketCap', 
+                        'volume24H', 'totalVolume', 'timestamp'])
 
         for c in content[1:]:
 

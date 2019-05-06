@@ -54,7 +54,7 @@ if __name__ == '__main__':
     filename = "{}/tiagoArrazi/crawler_dolar/dolar_{}.csv".format(Popen('pwd', stdout=PIPE).communicate()[0][:-1].decode('utf-8'), getCurrentTimestamp())
 
     try:
-        requestString = get(url = url, headers = {'User-Agent':'curl/7.52.1'})
+        requestString = get(url=url, headers={'User-Agent':'curl/7.52.1'})
         soup = BeautifulSoup(requestString.text, "html.parser")
 
         with open(filename, 'a+') as f:
