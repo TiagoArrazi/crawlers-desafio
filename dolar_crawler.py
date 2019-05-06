@@ -51,7 +51,7 @@ def getCurrentTimestamp():
 if __name__ == '__main__':
 
     url = 'https://m.investing.com/currencies/usd-brl'
-    filename = "{}/tiagoArrazi/dolar_crawler/dolar_{}.csv".format(Popen('pwd', stdout=PIPE).communicate()[0].decode('utf-8'), getCurrentTimestamp())
+    filename = "{}/tiagoArrazi/dolar_crawler/dolar_{}.csv".format(Popen('pwd', stdout=PIPE).communicate()[0][:-2].decode('utf-8'), getCurrentTimestamp())
 
     try:
         requestString = get(url = url, headers = {'User-Agent':'curl/7.52.1'})
