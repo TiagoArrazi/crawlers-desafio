@@ -1,2 +1,2 @@
-*/20 * * * * python3 crypto_crawler.py
-0 0 * * * python3 dolar_crawler.py
+*/20 * * * * ~/tiagoArrazi/bin/python3 crypto_crawler.py
+0 0 * * * python3 ~/tiagoArrazi/bin/dolar_crawler.py
