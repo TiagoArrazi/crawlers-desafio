@@ -50,7 +50,7 @@ def getCurrentTimestamp():
 if __name__ == '__main__':
 
     url = 'https://m.investing.com/currencies/usd-brl'
-    filename = os.path.abspath(f"tiagoArrazi/crawler_dolar/dolar_{getCurrentTimestamp()}.csv")
+    filename = os.path.abspath(f"dolar_{getCurrentTimestamp()}.csv")
 
     try:
         requestString = get(url = url, headers = {'User-Agent':'curl/7.52.1'})

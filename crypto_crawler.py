@@ -16,11 +16,11 @@ soup = BeautifulSoup(requestString.text, "lxml")
 content = soup.findAll('tr')
 date = datetime.strptime(requestString.headers['Date'][:-4], '%a, %d %b %Y %H:%M:%S')
 
-with open(path.abspath(f"tiagoArrazi/crawler_crypto/crypto_{get_timestamp()}.csv"), "a+") as f:
+with open(path.abspath(f"crypto_{get_timestamp()}.csv"), "a+") as f:
 
         w = writer(f, delimiter = ";")
 
-        if stat(path.abspath(f"tiagoArrazi/crawler_crypto/crypto_{get_timestamp()}.csv")).st_size == 0:
+        if stat(path.abspath(f"crypto_{get_timestamp()}.csv")).st_size == 0:
             w.writerow(['code', 'name', 'priceUSD', 'change24H', 'change7D', 'symbol', 'priceBTC', 'marketCap', 'volume24H', 'totalVolume', 'timestamp'])
 
         for c in content[1:]:
