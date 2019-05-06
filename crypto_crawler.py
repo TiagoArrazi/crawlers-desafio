@@ -4,7 +4,10 @@ from csv import writer
 from datetime import datetime
 from requests import ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError, get
 
-timestamp = ''.join([str(t) for t in list(datetime.now().timetuple())[:-6]])
+
+def get_timestamp():
+    return ''.join(['0' + str(t) if t in list(range(1,10)) else str(t) for t in list(datetime.now().timetuple())[:-6]])
+
 
 crypto_Url = "https://m.investing.com/crypto/"
 
@@ -13,11 +16,11 @@ soup = BeautifulSoup(requestString.text, "lxml")
 content = soup.findAll('tr')
 date = datetime.strptime(requestString.headers['Date'][:-4], '%a, %d %b %Y %H:%M:%S')
 
-with open(path.abspath(f"tiagoArrazi/crawler_crypto/crypto_{timestamp}.csv"), "a+") as f:
+with open(path.abspath(f"tiagoArrazi/crawler_crypto/crypto_{get_timestamp()}.csv"), "a+") as f:
 
         w = writer(f, delimiter = ";")
 
-        if stat(path.abspath(f"tiagoArrazi/crawler_crypto/crypto_{timestamp}.csv")).st_size == 0:
+        if stat(path.abspath(f"tiagoArrazi/crawler_crypto/crypto_{get_timestamp()}.csv")).st_size == 0:
             w.writerow(['code', 'name', 'priceUSD', 'change24H', 'change7D', 'symbol', 'priceBTC', 'marketCap', 'volume24H', 'totalVolume', 'timestamp'])
 
         for c in content[1:]:

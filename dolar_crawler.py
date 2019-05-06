@@ -32,7 +32,7 @@ def beautifulPercentageScraper(soup):
 def getTimestamp(requestString):
 
     date = requestString.headers["Date"][:-4]
-    timestamp = datetime.datetime.strptime(date, "%a, %d %b %Y %H:%M:%S")
+    timestamp = ''.join(['0' + str(t) if t in list(range(1,10)) else str(t) for t in list(datetime.datetime.strptime(date, "%a, %d %b %Y %H:%M:%S").timetuple())[:-6]])
     return timestamp
 
 
