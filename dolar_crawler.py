@@ -32,20 +32,31 @@ def beautifulPercentageScraper(soup):
 def getTimestamp(requestString):
 
     date = requestString.headers["Date"][:-4]
-    timestamp = ''.join(['0' + str(t) if t in list(range(1,10)) else str(t) for t in list(datetime.datetime.strptime(date, "%a, %d %b %Y %H:%M:%S").timetuple())[:-6]])
+    timestamp = ''.join(['0' + str(t) 
+                          if t in list(range(1,10)) 
+                          else str(t) 
+                          for t in list(datetime.datetime.strptime(date, "%a, %d %b %Y %H:%M:%S").timetuple())[:-6]])
     return timestamp
+
+
+def getCurrentTimestamp():
+
+    return ''.join(['0' + str(t) 
+                     if t in list(range(1,10)) 
+                     else str(t) 
+                     for t in list(datetime.datetime.now().timetuple())[:-6]])
 
 
 if __name__ == '__main__':
 
     url = 'https://m.investing.com/currencies/usd-brl'
-    filename = 'dolar.csv'
+    filename = os.path.abspath(f"tiagoArrazi/crawler_dolar/dolar_{getCurrentTimestamp()}.csv")
 
     try:
         requestString = get(url = url, headers = {'User-Agent':'curl/7.52.1'})
         soup = BeautifulSoup(requestString.text, "html.parser")
 
-        with open('dolar.csv', 'a+') as f:
+        with open(filename, 'a+') as f:
             w = csv.writer(f, delimiter=';')
 
             if os.stat(filename).st_size == 0:
