@@ -1,2 +1,6 @@
 */20 * * * * python3 ~/tiagoArrazi/bin/crypto_crawler.py
 0 0 * * * python3 ~/tiagoArrazi/bin/dolar_crawler.py
+3 0 * * * python3 ~/tiagoArrazi/bin/create_index.py
+5 0 * * * python3 ~/tiagoArrazi/bin/sparker.py
+
+
