@@ -13,6 +13,6 @@ def get_current_timestamp():
 
 dolar_filename = '/user/tiagoArrazi/input/dolar_{}.csv'.format(get_current_timestamp())
 crypto_filename = '/user/tiagoArrazi/input/crypto_{}.csv'.format(get_current_timestamp())
-jar_file = 'spark_process_2.11-0.1.0-SNAPSHOT.jar'
+jar_file = '/user/tiagoArrazi/spark_process_2.11-0.1.0-SNAPSHOT.jar'
 
-Popen("spark-submit {} {} {}".format(jar_file, crypto_filename, dolar_filename), shell=True).communicate()
+Popen("hadoop jar {} {} {}".format(jar_file, crypto_filename, dolar_filename), shell=True).communicate()
