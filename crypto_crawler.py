@@ -10,7 +10,7 @@ def get_timestamp(date=datetime.now()):
     return ''.join(['0' + str(t)
                      if t in list(range(1,10))
                      else str(t)
-                     for t in list(date.timetuple())[:-6]])
+                     for t in list(date.timetuple())[:-4]])
 
 
 crypto_Url = "https://m.investing.com/crypto/"
