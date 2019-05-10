@@ -13,7 +13,7 @@ my_json = ""
 
 with open(json_file, 'r') as js:
     for line in js:
-        my_json = "{\"index\":{}}\n" + line + "\n"
+        my_json = "{\"index\":{}}\n" + line
 
 bulk_insert = "curl -XPOST localhost:9200/crypto_{}/_bulk -d '{}'".format(get_timestamp(), my_json)
 
