@@ -13,7 +13,6 @@ def get_timestamp(date=datetime.now()):
                      for t in list(date.timetuple())[:-6]])
 
 
-
 crypto_Url = "https://m.investing.com/crypto/"
 
 requestString = get(url = crypto_Url, headers = {'User-Agent':'curl/7.52.1'})
@@ -21,7 +20,6 @@ soup = BeautifulSoup(requestString.text, "html.parser")
 content = soup.findAll('tr')
 date = get_timestamp(datetime.strptime(requestString.headers['Date'][:-4], '%a, %d %b %Y %H:%M:%S'))
 filename = "{}/tiagoArrazi/crawler_crypto/crypto_{}.csv".format(Popen('pwd', stdout=PIPE).communicate()[0][:-1].decode('utf-8'), get_timestamp())
-
 
 with open(filename, "a+") as f:
 
@@ -38,3 +36,6 @@ with open(filename, "a+") as f:
             L = list(filter(None, l))
 
             w.writerow([L[0],L[1],L[2],L[3],L[4],L[5],L[6],L[7],L[8],L[9], date])
+
+
+Popen("sed -i 's/,//g' {}".format(filename), shell=True).communicate()
