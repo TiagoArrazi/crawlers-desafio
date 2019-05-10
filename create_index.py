@@ -17,6 +17,18 @@ index_json = json.dumps({
     "settings": {
         "number_of_shards": 1, 
         "number_of_replicas": 0
+        },
+    "mapping": {
+        "properties": {
+            "code": {"type": "integer"},
+            "name": {"type": "string"},
+            "priceUSD": {"type": "double"},
+            "priceBRL": {"type": "double"},
+            "priceBTC": {"type": "double"},
+            "change24H": {"type": "string"},
+            "volume24H": {"type": "string"},
+            "timestamp": {"type": "string"}
+            }
         }
     }
 )
