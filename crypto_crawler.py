@@ -19,7 +19,7 @@ requestString = get(url = crypto_Url, headers = {'User-Agent':'curl/7.52.1'})
 soup = BeautifulSoup(requestString.text, "html.parser")
 content = soup.findAll('tr')
 date = get_timestamp(datetime.strptime(requestString.headers['Date'][:-4], '%a, %d %b %Y %H:%M:%S'))
-filename = "{}/../crawler_crypto/crypto_{}.csv".format(Popen('pwd', stdout=PIPE).communicate()[0][:-1].decode('utf-8'), get_timestamp())
+filename = "{}/tiagoArrazi/crawler_crypto/crypto_{}.csv".format(Popen('pwd', stdout=PIPE).communicate()[0][:-1].decode('utf-8'), get_timestamp())
 print(filename)
 
 with open(filename, "w+") as f:
