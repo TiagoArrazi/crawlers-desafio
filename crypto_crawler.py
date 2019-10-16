@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from csv import writer
 from datetime import datetime
 from requests import ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError, get
-from subprocess import Popen, PIPE 
+from subprocess import call, PIPE, Popen 
 
 
 def get_timestamp(date=datetime.now()):
@@ -20,8 +20,9 @@ soup = BeautifulSoup(requestString.text, "html.parser")
 content = soup.findAll('tr')
 date = get_timestamp(datetime.strptime(requestString.headers['Date'][:-4], '%a, %d %b %Y %H:%M:%S'))
 filename = "{}/tiagoArrazi/crawler_crypto/crypto_{}.csv".format(Popen('pwd', stdout=PIPE).communicate()[0][:-1].decode('utf-8'), get_timestamp())
+print(filename)
 
-with open(filename, "a+") as f:
+with open(filename, "w+") as f:
 
         w = writer(f, delimiter = ";")
 
@@ -38,4 +39,4 @@ with open(filename, "a+") as f:
             w.writerow([L[0],L[1],L[2],L[3],L[4],L[5],L[6],L[7],L[8],L[9], date])
 
 
-Popen("sed -i 's/,//g' {}".format(filename), shell=True).communicate()
+call("sed -i 's/,//g' {}".format(filename), shell=True)
