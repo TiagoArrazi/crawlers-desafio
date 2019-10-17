@@ -1,4 +1,4 @@
-from os import stat
+from os import stat, chdir, path
 from bs4 import BeautifulSoup
 from csv import writer
 from datetime import datetime
@@ -12,15 +12,21 @@ def get_timestamp(date=datetime.now()):
                      else str(t)
                      for t in list(date.timetuple())[:-4]])
 
+chdir(path.expanduser('~/tiagoArrazi/crawler_crypto'))
 
 crypto_Url = "https://m.investing.com/crypto/"
 
-requestString = get(url = crypto_Url, headers = {'User-Agent':'curl/7.52.1'})
+try:
+    requestString = get(url = crypto_Url, headers = {'User-Agent':'curl/7.52.1'})
+
+except (ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError):
+    print('Couldn\'t connect, quitting!')
+    exit(-1)
+
 soup = BeautifulSoup(requestString.text, "html.parser")
 content = soup.findAll('tr')
 date = get_timestamp(datetime.strptime(requestString.headers['Date'][:-4], '%a, %d %b %Y %H:%M:%S'))
-filename = "{}/tiagoArrazi/crawler_crypto/crypto_{}.csv".format(Popen('pwd', stdout=PIPE).communicate()[0][:-1].decode('utf-8'), get_timestamp())
-print(filename)
+filename = "crypto_{}.csv".format(get_timestamp())
 
 with open(filename, "w+") as f:
 

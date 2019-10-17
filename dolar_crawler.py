@@ -51,13 +51,14 @@ def getCurrentTimestamp():
 if __name__ == '__main__':
 
     url = 'https://m.investing.com/currencies/usd-brl'
-    filename = "{}/tiagoArrazi/crawler_dolar/dolar_{}.csv".format(Popen('pwd', stdout=PIPE).communicate()[0][:-1].decode('utf-8'), getCurrentTimestamp())
+    os.chdir('~/tiagoArrazi/crawler_dolar')
+    filename = "dolar_{}.csv".format(getCurrentTimestamp())
 
     try:
         requestString = get(url=url, headers={'User-Agent':'curl/7.52.1'})
         soup = BeautifulSoup(requestString.text, "html.parser")
 
-        with open(filename, 'a+') as f:
+        with open(filename, 'w+') as f:
             w = csv.writer(f, delimiter=';')
 
             if os.stat(filename).st_size == 0:
