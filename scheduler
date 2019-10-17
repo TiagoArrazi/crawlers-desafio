@@ -1,9 +1,6 @@
 */20 * * * * python3 ~/tiagoArrazi/bin/crypto_crawler.py
 55 23 * * * python3 ~/tiagoArrazi/bin/consolidate_daily_crypto.py
 55 23 * * * python3 ~/tiagoArrazi/bin/dolar_crawler.py
-#59 23 * * * python3 ~/tiagoArrazi/bin/move_to_hdfs.py
-#57 23 * * * python3 ~/tiagoArrazi/bin/create_index.py
-#55 23 * * * python3 ~/tiagoArrazi/bin/sparker.py
-#50 23 * * * python3 ~/tiagoArrazi/bin/get_json_from_hdfs.py
-#49 23 * * * python3 ~/tiagoArrazi/bin/bulk_indexing.py
+57 23 * * * python3 ~/tiagoArrazi/bin/sparker_export_json.py
+59 23 * * * python3 ~/tiagoArrazi/bin/create_index_bulk_insert.py
 

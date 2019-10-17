@@ -7,7 +7,7 @@ from datetime import datetime
 
 def get_timestamp(date_string):
     return ''.join([str(t).zfill(2) 
-                    for t in date_string.timetuple()[:4]])
+                    for t in date_string.timetuple()[:-6]])
 
 
 os.chdir(os.path.expanduser('~/tiagoArrazi/crawler_crypto'))
