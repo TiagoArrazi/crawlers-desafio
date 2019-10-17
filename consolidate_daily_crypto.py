@@ -12,9 +12,10 @@ def get_timestamp(date_string):
 
 os.chdir(os.path.expanduser('~/tiagoArrazi/crawler_crypto'))
 filename = 'consolidate_crypto_{}.csv'.format(get_timestamp(datetime.now()))
+all_data = glob.glob('*.csv')
 
 try:
-    df = pd.concat([pd.read_csv(f) for f in glob.glob('*.csv')], ignore_index=True)
+    df = pd.concat([pd.read_csv(f) for f all_data], ignore_index=True)
 
 except ValueError:
     df = pd.Dataframe()
@@ -22,5 +23,10 @@ except ValueError:
 os.chdir(os.path.expanduser('~/tiagoArrazi/crawler_crypto/consolidados'))
 
 df.to_csv(filename, sep=';', index=False)
+
 subprocess.call("sed -i 's/\"//g' {}".format(filename), shell=True)
-    
+
+os.chdir(os.path.expanduser('~/tiagoArrazi/crawler_crypto'))
+
+subprocess.call('zip -u ../processados/processados.zip {}'.format(' '.join(all_data)), shell=True)
+
